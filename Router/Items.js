@@ -8,7 +8,6 @@ router.get('/get-item/:id', getItem);
 router.post('/add-item', addItem);
 
 router.patch('/edit-item/:id', editItem);
-// router.put('/edit-item/:id', editItem);
 
 router.delete('/delete-item/:id', deleteItem)
 
