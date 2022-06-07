@@ -2,8 +2,8 @@ const express = require('express');
 const { getItems, addItem, editItem, getItem, deleteItem } = require('../Modules/Items');
 const router = express.Router();
 
-router.get('/', getItems);
-router.get('/:id', getItem);
+router.get('/get-items', getItems);
+router.get('/get-item/:id', getItem);
 
 router.post('/add-item', addItem);
 
