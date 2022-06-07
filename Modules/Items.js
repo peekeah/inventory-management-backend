@@ -23,8 +23,9 @@ module.exports.getItem = async (req, res) => {
 // Add Item
 module.exports.addItem = async (req, res) => {
     try {
-        const dateNow = new Date(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
-        const data = await new itemModal({date: dateNow, ...req.body}).save();
+        // const dateNow = new Date(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
+        // const data = await new itemModal({date: dateNow, ...req.body}).save();
+        const data = await new itemModal({...req.body}).save();
         res.send(data);       
     } catch (err) {
         console.log(err.message)
@@ -33,11 +34,14 @@ module.exports.addItem = async (req, res) => {
 }
 
 //Edit Items
-module.exports.editItem = async (req, res, next) => {
-    const dateNow = new Date(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
+module.exports.editItem = async (req, res) => {
+    // const dateNow = new Date(new Date().getFullYear(), new Date().getMonth()+1, new Date().getDate());
     try {
-        let data = await itemModal.findById(req.params.id);
-        data = {...req.body, date: dateNow};
+        let data = await itemModal.findOneAndUpdate({_id: req.params.id}, {...req.body});
+        // let data = await itemModal.findById(req.params.id);
+        // data = {...req.body, date: dateNow};
+        data = { ...req.body};
+        // data.save();
         res.json(data);
     } catch (err) {
         console.log(err.message);
@@ -46,7 +50,7 @@ module.exports.editItem = async (req, res, next) => {
 }
 
 //Delete item
-module.exports.deleteItem = async (req, res, next) => {
+module.exports.deleteItem = async (req, res) => {
     try {
         const data = await itemModal.findById(req.params.id);
         data.remove();
@@ -54,5 +58,4 @@ module.exports.deleteItem = async (req, res, next) => {
     } catch (err) {
         res.status(404).send(err.message);
     }
-
 }
