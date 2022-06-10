@@ -9,4 +9,4 @@ Endpoints
 
 /edit-item - to edit product details
 
-/delete/:id - to delete product
+/delete-item/:id - to delete product
